@@ -144,8 +144,8 @@ Turn it into a map
 	todoForm<span class="token punctuation">:</span> FormGroup<span class="token punctuation">,</span>
 	toDoArray<span class="token punctuation">:</span> FormArray
 	fb<span class="token punctuation">:</span> FormBuilder <span class="token operator">=</span> <span class="token function">inject</span><span class="token punctuation">(</span>FormBuilder<span class="token punctuation">)</span>
-
-	<span class="token function">ngOnInit</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</code></pre>
+<pre class=" language-javascript"><code class="prism  language-javascript">	<span class="token function">ngOnInit</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 		<span class="token keyword">this</span><span class="token punctuation">.</span>todoArray <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>fb<span class="token punctuation">.</span><span class="token function">array</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 		<span class="token keyword">this</span><span class="token punctuation">.</span>todoForm <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>fb<span class="token punctuation">.</span><span class="token function">group</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
 			todos <span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>toDoArray
