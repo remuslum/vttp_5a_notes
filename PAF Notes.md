@@ -47,6 +47,38 @@ inject an instance of JdbcTemplate</p>
 </ul>
 <pre class=" language-sql"><code class="prism  language-sql"><span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> <span class="token operator">&lt;</span>table_name<span class="token operator">&gt;</span> <span class="token keyword">VALUES</span> <span class="token punctuation">(</span>?<span class="token punctuation">,</span>?<span class="token punctuation">,</span>?<span class="token punctuation">)</span>
 </code></pre>
+<ul>
+<li>Insert (Java)</li>
+</ul>
+<pre class=" language-java"><code class="prism  language-java"><span class="token annotation punctuation">@Repository</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TVShowRepository</span><span class="token punctuation">{</span>
+	<span class="token annotation punctuation">@Autowired</span>
+	<span class="token keyword">private</span> JdbcTemplate template<span class="token punctuation">;</span>
+
+	<span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">final</span> TVShow tv<span class="token punctuation">)</span><span class="token punctuation">{</span>
+		<span class="token keyword">int</span> added <span class="token operator">=</span> template<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span>
+		"INSERT INTO <span class="token function">tv_shows</span><span class="token punctuation">(</span>prog_id<span class="token punctuation">,</span>name<span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token function">VALUES</span> <span class="token punctuation">(</span><span class="token operator">?</span><span class="token punctuation">,</span><span class="token operator">?</span><span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">return</span> added <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>Batch Insert (Java)</li>
+</ul>
+<pre class=" language-java"><code class="prism  language-java"><span class="token annotation punctuation">@Repository</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TVShowRepository</span> <span class="token punctuation">{</span>
+	<span class="token annotation punctuation">@Autowired</span>
+	<span class="token keyword">private</span> JdbcTemplate template<span class="token punctuation">;</span>
+
+	<span class="token keyword">public</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">final</span> List<span class="token operator">&lt;</span>TVShow<span class="token operator">&gt;</span> shows<span class="token punctuation">)</span><span class="token punctuation">{</span>
+		<span class="token comment">// Cast to a list of object[] first</span>
+		List<span class="token operator">&lt;</span>Object<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&gt;</span> params <span class="token operator">=</span> shows<span class="token punctuation">.</span><span class="token function">stream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>tv <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span>tv<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> tv<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+
+		<span class="token keyword">int</span> added<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> template<span class="token punctuation">.</span><span class="token function">updateBatch</span><span class="token punctuation">(</span><span class="token string">"INSERT INTO tv_shows(prog_id,name,...) VALUES (?,?,...)"</span><span class="token punctuation">,</span> params<span class="token punctuation">)</span>
+		<span class="token keyword">return</span> added<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
 <p>Columns can skipped if they are ‘nullable’ or auto incremented</p>
 <h3 id="read">Read</h3>
 <ul>
