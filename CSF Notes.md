@@ -151,8 +151,8 @@ Turn it into a map
 			todos <span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>toDoArray
 		<span class="token punctuation">}</span><span class="token punctuation">)</span>
 	<span class="token punctuation">}</span>
-
-	<span class="token function">addToDo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+</code></pre>
+<pre class=" language-javascript"><code class="prism  language-javascript">	<span class="token function">addToDo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
 		<span class="token keyword">const</span> toDoGroup <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>fb<span class="token punctuation">.</span><span class="token function">group</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
 			date<span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>fb<span class="token punctuation">.</span>control<span class="token operator">&lt;</span>Date<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
 			description<span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>fb<span class="token punctuation">.</span>control<span class="token operator">&lt;</span>string<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
